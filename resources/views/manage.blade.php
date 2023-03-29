@@ -13,7 +13,7 @@
                                     class="fas fa-print"></i> Print</a>
                         </div>
                     </div>
-                    
+
                     <!-- /.card-header -->
                     <div class="card-body" id="printableArea">
                         <table id="example2" class="table table-bordered table-hover text-center">
@@ -28,17 +28,19 @@
                             </thead>
                             <tbody>
                                @foreach ($expense as $e)
-                               <tr> 
+                               <tr>
                                 <td> {{$e->id}}</td>
                                 <td> {{$e->date}}</td>
                                 <td> {{$e->expense}}</td>
                                 <td> {{$e->category}}</td>
-                                <td> Edit/Delete</td>
+                                <td>
+                                    <a href="{{ route('update', $e->id) }}">Edit</a>
+                                </td>
                                </tr>
                                @endforeach
                             </tbody>
                             <tfoot>
-                                
+
                             </tfoot>
                         </table>
                     </div>

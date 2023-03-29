@@ -22,7 +22,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="index.php"><b>Daily</b>Expense</a>
+            <a href=""><b>Daily</b>Expense</a>
         </div>
 
         <div class="card">
@@ -31,7 +31,7 @@
 
                 <form action="{{ route('register') }}" id="register" method="post">
                     @csrf
-                    
+
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" id="firstname" name="firstname"
                             placeholder="First name">
@@ -168,7 +168,7 @@
                 $(element).removeClass('is-invalid');
             }
         });
-    }); 
+    });
   </script>
-</body> 
+</body>
 </html>

@@ -29,6 +29,11 @@ class MainController extends Controller {
         return view('addexpense');
     }
 
+    public function edit($id) {
+        $expense = Expense::find($id);
+        return view('updateexpense', compact('expense'));
+    }
+
     public function profile() {
         $user = Auth::user();
         return view('profile', compact('user'));
@@ -74,5 +79,10 @@ class MainController extends Controller {
             $user->save();
         }
         return redirect()->route('profile')->with('success', 'Profile Update Successfully');
+    }
+    public function update(Request $request, $id){
+        $expense = Expense::find($id);
+        $expense->update(['category'=>$request->expensecategory, 'date'=>$request->expensedate, 'expense'=>$request->expenseamount]);
+         return redirect()->route('manage')->with('success', 'Update Expense Successfully');
     }
 }

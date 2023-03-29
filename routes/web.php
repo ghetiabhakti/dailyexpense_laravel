@@ -31,7 +31,7 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 //logout the session and auth
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::group(['middleware'=>'auth'], function(){
+Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', [MainController::class, 'dashboard'])->name('dashboard');
     Route::get('manage', [MainController::class, 'manage'])->name('manage');
     Route::get('add', [MainController::class, 'add'])->name('add');
@@ -39,4 +39,6 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('profile', [MainController::class, 'profile'])->name('profile');
     Route::post('profile', [MainController::class, 'profileStore'])->name('profile.store');
     Route::post('profileUpload', [MainController::class, 'profileUpload'])->name('profileUpload');
-    });
+    Route::get('update/{id}', [MainController::class, 'edit'])->name('update');
+    Route::post('expense/{id}/update', [MainController::class, 'update'])->name('update.store');
+});
