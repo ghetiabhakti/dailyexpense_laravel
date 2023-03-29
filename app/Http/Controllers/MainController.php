@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Expense;
 
-class MainController extends Controller
-{
+class MainController extends Controller {
     public function register() {
         return view('register');
     }
@@ -15,34 +14,65 @@ class MainController extends Controller
     public function login() {
         return view('login');
     }
+
     public function dashboard() {
         return view('dashboard');
     }
+
     public function manage() {
         $expense = Expense::where('user_id', Auth::id())->get();
-     
-        return view('manage',compact('expense'));
+
+        return view('manage', compact('expense'));
     }
+
     public function add() {
         return view('addexpense');
-    }public function profile() {
-        return view('profile');
     }
-    public function addStore( Request $request){
+
+    public function profile() {
+        $user = Auth::user();
+        return view('profile', compact('user'));
+    }
+
+    public function addStore(Request $request) {
         $validate = $request->validate([
             'expenseamount' => 'required',
             'expensedate' => 'required',
-            'expensecategory' => 'required'
-            
+            'expensecategory' => 'required',
+        ]);
 
-           ,]);
-         
         $user = Expense::create([
             'user_id' => Auth::id(),
             'expense' => $request->expenseamount,
             'date' => $request->expensedate,
             'category' => $request->expensecategory,
         ]);
-return redirect()->route('manage')->with('success', 'Add Expense Successfully');
+        return redirect()->route('manage')->with('success', 'Add Expense Successfully');
+    }
+    public function profileStore(Request $request){
+//        dd($request->all());
+        $validate = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'expenseLimit' => 'required'
+        ]);
+        $user = Auth::user();
+        $user->first_name=$request->first_name;
+        $user->last_name=$request->last_name;
+        $user->email=$user->email;
+        $user->expense_limit=$request->expenseLimit;
+        $user->save();
+        return redirect()->route('profile')->with('success', 'Profile Update Successfully');
+    }
+    public function profileUpload (Request $request){
+        $user = Auth::user();
+        if ($request->hasFile('file')) {
+            $image = $request->file('file');
+            $filename = $user->email . '_' . $image->getClientOriginalName();
+            $path = $image->storeAs('public/profile', $filename);
+            $user->profile = $filename;
+            $user->save();
+        }
+        return redirect()->route('profile')->with('success', 'Profile Update Successfully');
     }
 }

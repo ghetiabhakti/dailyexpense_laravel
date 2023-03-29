@@ -37,5 +37,6 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('add', [MainController::class, 'add'])->name('add');
     Route::post('add', [MainController::class, 'addStore'])->name('add.store');
     Route::get('profile', [MainController::class, 'profile'])->name('profile');
-    Route::post('profile', [MainController::class, 'profile'])->name('profile.store');
+    Route::post('profile', [MainController::class, 'profileStore'])->name('profile.store');
+    Route::post('profileUpload', [MainController::class, 'profileUpload'])->name('profileUpload');
     });
