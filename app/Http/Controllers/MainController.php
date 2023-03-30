@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Expense;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller {
     public function register() {
@@ -21,8 +23,8 @@ class MainController extends Controller {
 
     public function manage() {
         $expense = Expense::where('user_id', Auth::id())->get();
-    $total=Expense::where('user_id', Auth::id())->count('expense_limit');
-        return view('manage', compact('expense'));
+        $total = DB::table('expenses')->where('user_id', Auth::id())->sum('expense');
+        return view('manage', compact('expense', 'total'));
     }
 
     public function add() {
@@ -54,7 +56,8 @@ class MainController extends Controller {
         ]);
         return redirect()->route('manage')->with('success', 'Add Expense Successfully');
     }
-    public function profileStore(Request $request){
+
+    public function profileStore(Request $request) {
 //        dd($request->all());
         $validate = $request->validate([
             'first_name' => 'required',
@@ -62,14 +65,15 @@ class MainController extends Controller {
             'expenseLimit' => 'required'
         ]);
         $user = Auth::user();
-        $user->first_name=$request->first_name;
-        $user->last_name=$request->last_name;
-        $user->email=$user->email;
-        $user->expense_limit=$request->expenseLimit;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $user->email;
+        $user->expense_limit = $request->expenseLimit;
         $user->save();
         return redirect()->route('profile')->with('success', 'Profile Update Successfully');
     }
-    public function profileUpload (Request $request){
+
+    public function profileUpload(Request $request) {
         $user = Auth::user();
         if ($request->hasFile('file')) {
             $image = $request->file('file');
@@ -80,9 +84,10 @@ class MainController extends Controller {
         }
         return redirect()->route('profile')->with('success', 'Profile Update Successfully');
     }
-    public function update(Request $request, $id){
+
+    public function update(Request $request, $id) {
         $expense = Expense::find($id);
-        $expense->update(['category'=>$request->expensecategory, 'date'=>$request->expensedate, 'expense'=>$request->expenseamount]);
-         return redirect()->route('manage')->with('success', 'Update Expense Successfully');
+        $expense->update(['category' => $request->expensecategory, 'date' => $request->expensedate, 'expense' => $request->expenseamount]);
+        return redirect()->route('manage')->with('success', 'Update Expense Successfully');
     }
 }
