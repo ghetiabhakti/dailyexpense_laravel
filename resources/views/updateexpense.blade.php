@@ -36,42 +36,42 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory3" value="Food" >
+                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory3" value="Food" {{ $expense->category=='Food'?'checked':"" }}>
                                                 Food
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory2" value="Bills & Recharges" >
+                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory2" value="Bills & Recharges" {{ $expense->category=='Bills & Recharges'?'checked':"" }} >
                                             <label class="form-check-label" for="expensecategory2">
                                                 Bills and Recharges
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory1" value="Entertainment" >
+                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory1" value="Entertainment" {{ $expense->category=='Entertainment'?'checked':"" }} >
                                             <label class="form-check-label" for="expensecategory1">
                                                 Entertainment
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory7" value="Clothings" >
+                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory7" value="Clothings" {{ $expense->category=='Clothings'?'checked':"" }}>
                                             <label class="form-check-label" for="expensecategory7">
                                                 Clothings
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory6" value="Rent" >
+                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory6" value="Rent" {{ $expense->category=='Rent'?'checked':"" }}>
                                             <label class="form-check-label" for="expensecategory6">
                                                 Rent
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory8" value="Household Items" >
+                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory8" value="Household Items" {{ $expense->category=='Household Items'?'checked':"" }}>
                                             <label class="form-check-label" for="expensecategory8">
                                                 Household Items
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory5" value="Others" >
+                                            <input class="form-check-input" type="radio" name="expensecategory" id="expensecategory5" value="Others" {{ $expense->category=='Others'?'checked':"" }}>
                                             <label class="form-check-label" for="expensecategory5">
                                                 Others
                                             </label>

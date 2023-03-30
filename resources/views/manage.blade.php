@@ -4,6 +4,14 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
+            @if($total>\Illuminate\Support\Facades\Auth::user()->expense_limit)
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  Your monthly Limit has cross!
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+            @endif
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">

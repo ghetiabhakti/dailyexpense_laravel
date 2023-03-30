@@ -21,7 +21,7 @@ class MainController extends Controller {
 
     public function manage() {
         $expense = Expense::where('user_id', Auth::id())->get();
-
+    $total=Expense::where('user_id', Auth::id())->count('expense_limit');
         return view('manage', compact('expense'));
     }
 
